@@ -104,7 +104,7 @@ export const patientInfoAgent = new LlmAgent({
   name: "patient_info",
   description:
     "Manages patient profiles and visit information. Use this agent when the user needs to register, update their profile, or add visit notes.",
-  model: "gemini-2.0-flash",
+  model: "gemini-2.0-flash-001",
   instruction: `You are the Patient Info Agent. You manage patient profiles and visit information.
 
 You have access to these tools:
