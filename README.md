@@ -71,6 +71,31 @@ psql -h <ALLOYDB_IP> -U postgres -d medischedule -f sql/seed.sql
 
 The seed script will automatically generate doctor embeddings in-database using the `embedding()` function.
 
+## Deploy to Cloud Run
+
+From the project root directory in Google Cloud Shell:
+
+```bash
+cd medischedule
+
+gcloud beta run deploy medischedule-ai \
+  --source . \
+  --region us-central1 \
+  --network projects/<YOUR_PROJECT_ID>/global/networks/<YOUR_VPC_NAME> \
+  --subnet projects/<YOUR_PROJECT_ID>/regions/us-central1/subnetworks/<YOUR_SUBNET_NAME> \
+  --allow-unauthenticated \
+  --vpc-egress=all-traffic \
+  --set-env-vars \
+    ALLOYDB_HOST=<ALLOYDB_IP>,ALLOYDB_PORT=5432,ALLOYDB_USER=postgres,ALLOYDB_PASSWORD=<YOUR_PASSWORD>,ALLOYDB_DATABASE=medischedule,GOOGLE_CLOUD_PROJECT=<YOUR_PROJECT_ID>,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_API_KEY=<YOUR_GEMINI_API_KEY>,NODE_ENV=production
+```
+
+Replace the placeholders with your actual values:
+- `<YOUR_PROJECT_ID>` - your GCP project ID
+- `<YOUR_VPC_NAME>` and `<YOUR_SUBNET_NAME>` - the VPC and subnet where AlloyDB is reachable
+- `<ALLOYDB_IP>` - the AlloyDB instance private IP
+- `<YOUR_PASSWORD>` - the AlloyDB postgres password
+- `<YOUR_GEMINI_API_KEY>` - your Gemini API key
+
 ## API
 
 | Endpoint | Description |

@@ -75,6 +75,8 @@ app.post("/chat", async (req, res) => {
     });
 
     for await (const event of result) {
+      console.log("ADK Event:", JSON.stringify(event, null, 2));
+
       // Collect the final response text
       if (event.content?.parts) {
         for (const part of event.content.parts) {
