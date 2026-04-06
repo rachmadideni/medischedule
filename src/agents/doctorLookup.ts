@@ -22,8 +22,13 @@ const searchDoctorsBySymptomTool = new FunctionTool({
       .describe("Max number of results"),
   }),
   execute: async (params) => {
-    const doctors = await searchDoctorsBySymptom(params.symptomDescription, params.limit);
-    return { doctors, count: doctors.length };
+    try {
+      const doctors = await searchDoctorsBySymptom(params.symptomDescription, params.limit);
+      return { doctors, count: doctors.length };
+    } catch (error) {
+      console.error("searchDoctorsBySymptom error:", error);
+      return { error: String(error), doctors: [], count: 0 };
+    }
   },
 });
 
@@ -39,8 +44,13 @@ const searchDoctorsBySpecialtyTool = new FunctionTool({
       ),
   }),
   execute: async (params) => {
-    const doctors = await searchDoctorsBySpecialty(params.specialty);
-    return { doctors, count: doctors.length };
+    try {
+      const doctors = await searchDoctorsBySpecialty(params.specialty);
+      return { doctors, count: doctors.length };
+    } catch (error) {
+      console.error("searchDoctorsBySpecialty error:", error);
+      return { error: String(error), doctors: [], count: 0 };
+    }
   },
 });
 
