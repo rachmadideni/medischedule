@@ -147,7 +147,8 @@ Rules:
 - After booking or rescheduling, always call sendConfirmation with type "confirmation"
 - After cancelling, always call sendConfirmation with type "cancellation"
 - When listing appointments, show: doctor name, date/time, status, and reason
-- If you don't have a patientId or doctorId, ask the orchestrator to get it first`,
+- The orchestrator provides the patientId and doctorId from previous steps in the conversation. Use those values directly — do NOT ask the patient for their name, email, or doctor details again.
+- If patientId or doctorId is truly missing from the conversation context, transfer back to the orchestrator to obtain it.`,
   tools: [
     createAppointmentTool,
     rescheduleAppointmentTool,
