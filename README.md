@@ -7,7 +7,7 @@ It's built on top of Google Gemini AI using a multi-agent setup, where specializ
 ## Tech Stack
 
 - **Runtime:** Node.js + Express + TypeScript
-- **AI:** Google ADK (Agent Development Kit) with Gemini 2.0 Flash
+- **AI:** Google ADK (Agent Development Kit) with Gemini 3.1 Pro via Vertex AI
 - **Database:** AlloyDB with pgvector and google_ml_integration for in-database vector similarity search and embeddings
 - **Embeddings:** text-embedding-005 via AlloyDB's `embedding()` function for symptom-based doctor matching
 
@@ -86,7 +86,7 @@ gcloud beta run deploy medischedule-ai \
   --allow-unauthenticated \
   --vpc-egress=all-traffic \
   --set-env-vars \
-    ALLOYDB_HOST=<ALLOYDB_IP>,ALLOYDB_PORT=5432,ALLOYDB_USER=postgres,ALLOYDB_PASSWORD=<YOUR_PASSWORD>,ALLOYDB_DATABASE=medischedule,GOOGLE_CLOUD_PROJECT=<YOUR_PROJECT_ID>,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_API_KEY=<YOUR_GEMINI_API_KEY>,NODE_ENV=production
+    ALLOYDB_HOST=<ALLOYDB_IP>,ALLOYDB_PORT=5432,ALLOYDB_USER=postgres,ALLOYDB_PASSWORD=<YOUR_PASSWORD>,ALLOYDB_DATABASE=medischedule,GOOGLE_CLOUD_PROJECT=<YOUR_PROJECT_ID>,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=1,NODE_ENV=production
 ```
 
 Replace the placeholders with your actual values:
@@ -94,7 +94,7 @@ Replace the placeholders with your actual values:
 - `<YOUR_VPC_NAME>` and `<YOUR_SUBNET_NAME>` - the VPC and subnet where AlloyDB is reachable
 - `<ALLOYDB_IP>` - the AlloyDB instance private IP
 - `<YOUR_PASSWORD>` - the AlloyDB postgres password
-- `<YOUR_GEMINI_API_KEY>` - your Gemini API key
+- Vertex AI is used for model access (no API key needed — Cloud Run's default service account handles auth)
 
 ## API
 

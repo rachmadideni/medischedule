@@ -77,7 +77,7 @@ export const doctorLookupAgent = new LlmAgent({
   name: "doctor_lookup",
   description:
     "Finds relevant doctors based on symptoms or specialty, and checks their availability. Use this agent when the user wants to find a doctor or describes symptoms.",
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.1-pro-preview",
   instruction: `You are the Doctor Lookup Agent. Your job is to help find the right doctor for a patient.
 
 You have access to these tools:

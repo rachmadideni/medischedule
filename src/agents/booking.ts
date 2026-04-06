@@ -133,7 +133,7 @@ export const bookingAgent = new LlmAgent({
   name: "booking",
   description:
     "Manages appointment lifecycle: booking, rescheduling, cancelling, and listing appointments. Use this agent when the user wants to book, change, cancel, or view appointments.",
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.1-pro-preview",
   instruction: `You are the Booking Agent. You manage appointment bookings for patients.
 
 You have access to these tools:
