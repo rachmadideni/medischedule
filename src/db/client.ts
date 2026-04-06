@@ -10,6 +10,7 @@ const pool = new pg.Pool({
   password: process.env.ALLOYDB_PASSWORD,
   database: process.env.ALLOYDB_DATABASE,
   max: 10,
+  ssl: { rejectUnauthorized: false },
 });
 
 export async function query<T extends pg.QueryResultRow>(
