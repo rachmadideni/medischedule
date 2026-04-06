@@ -6,7 +6,7 @@ import { patientInfoAgent } from "./patientInfo.js";
 export const orchestratorAgent = new LlmAgent({
   name: "orchestrator",
   description: "Primary agent that coordinates doctor-patient booking workflows",
-  model: "gemini-3.1-pro-preview",
+  model: "gemini-2.5-pro",
   instruction: `You are MediSchedule AI, a helpful medical appointment booking assistant.
 
 Your job is to help patients:
