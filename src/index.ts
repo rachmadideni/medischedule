@@ -77,15 +77,21 @@ app.post("/chat", async (req, res) => {
     for await (const event of result) {
       console.log("ADK Event:", JSON.stringify(event, null, 2));
 
-      // Collect the final response text
       if (event.content?.parts) {
         for (const part of event.content.parts) {
-          if (part.text) {
-            responseText += part.text;
-          }
           if (part.functionCall) {
             actionsTaken.push(part.functionCall.name ?? "unknown");
           }
+        }
+
+        // Only keep the last text response to avoid duplicates
+        // from multiple agents (e.g. orchestrator + sub-agent both replying)
+        const textParts = event.content.parts
+          .filter((p: any) => p.text)
+          .map((p: any) => p.text)
+          .join("");
+        if (textParts) {
+          responseText = textParts;
         }
       }
 
